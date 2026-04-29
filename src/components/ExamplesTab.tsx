@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { displaySkillDescription, displaySkillName, displaySkillPrompt } from '../i18n/skill-labels';
 import type { Dict } from '../i18n/types';
 import { fetchSkillExample } from '../providers/registry';
 import { exportAsHtml, exportAsPdf, exportAsZip } from '../runtime/exports';
@@ -75,7 +76,7 @@ function matchesMode(skill: SkillSummary, filter: ModeFilter): boolean {
 }
 
 export function ExamplesTab({ skills, onUsePrompt }: Props) {
-  const t = useT();
+  const { locale, t } = useI18n();
   // Hold preview HTML per skill across re-renders so cards never re-flicker.
   const [previews, setPreviews] = useState<Record<string, string | null>>({});
   const [modeFilter, setModeFilter] = useState<ModeFilter>('all');
@@ -239,8 +240,8 @@ export function ExamplesTab({ skills, onUsePrompt }: Props) {
       )}
       {previewSkill ? (
         <PreviewModal
-          title={previewSkill.name}
-          subtitle={previewSkill.examplePrompt || previewSkill.description.replace(/\s+/g, ' ').slice(0, 160)}
+          title={displaySkillName(previewSkill, locale)}
+          subtitle={displaySkillPrompt(previewSkill, locale) || previewSkill.examplePrompt || displaySkillDescription(previewSkill, locale).replace(/\s+/g, ' ').slice(0, 160)}
           views={[
             {
               id: 'preview',
@@ -248,7 +249,7 @@ export function ExamplesTab({ skills, onUsePrompt }: Props) {
               html: previews[previewSkill.id],
             },
           ]}
-          exportTitleFor={() => previewSkill.name}
+          exportTitleFor={() => displaySkillName(previewSkill, locale)}
           onClose={() => setPreviewSkillId(null)}
         />
       ) : null}
@@ -269,7 +270,7 @@ function ExampleCard({
   onUsePrompt: () => void;
   onOpenPreview: () => void;
 }) {
-  const t = useT();
+  const { locale, t } = useI18n();
   const [hovered, setHovered] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const shareRef = useRef<HTMLDivElement | null>(null);
@@ -291,7 +292,7 @@ function ExampleCard({
     };
   }, [shareOpen]);
 
-  const exportTitle = skill.name;
+  const exportTitle = displaySkillName(skill, locale);
   const isMobile = skill.platform === 'mobile';
   const isDeck = skill.mode === 'deck';
 
@@ -320,7 +321,7 @@ function ExampleCard({
         {html ? (
           <>
             <iframe
-              title={`${skill.name} ${t('examples.previewLabel').toLowerCase()}`}
+              title={`${displaySkillName(skill, locale)} ${t('examples.previewLabel').toLowerCase()}`}
               sandbox="allow-scripts"
               srcDoc={buildSrcdoc(html)}
               tabIndex={-1}
@@ -338,7 +339,7 @@ function ExampleCard({
         )}
       </div>
       <div className="example-meta">
-        <div className="example-name">{skill.name}</div>
+        <div className="example-name">{displaySkillName(skill, locale)}</div>
         <div className="example-tags">
           <span className={`example-tag ${isMobile ? 'platform-mobile' : ''} ${isDeck ? 'mode-deck' : ''}`}>
             {tagForSkill(skill, t)}
@@ -350,9 +351,11 @@ function ExampleCard({
           ) : null}
         </div>
         <div className="example-prompt">
-          {skill.examplePrompt
-            ? `“${skill.examplePrompt}”`
-            : skill.description.replace(/\s+/g, ' ').slice(0, 240)}
+          {displaySkillPrompt(skill, locale)
+            ? `“${displaySkillPrompt(skill, locale)}”`
+            : skill.examplePrompt
+              ? `“${skill.examplePrompt}”`
+              : displaySkillDescription(skill, locale).replace(/\s+/g, ' ').slice(0, 240)}
         </div>
         <div className="example-card-actions">
           <button className="primary example-cta" onClick={onUsePrompt}>

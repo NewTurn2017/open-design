@@ -1,6 +1,6 @@
 # Open Design
 
-> **The open-source alternative to [Claude Design][cd].** Local-first, web-deployable, BYOK at every layer — your existing coding agent (Claude Code, Codex, Cursor Agent, Gemini CLI, OpenCode, Qwen) becomes the design engine, driven by **19 composable Skills** and **71 brand-grade Design Systems**.
+> **The open-source alternative to [Claude Design][cd].** Local-first, GitHub-shareable, BYOK at every layer — your existing coding agent (Claude Code, Codex, Cursor Agent, Gemini CLI, OpenCode, Qwen) becomes the design engine, driven by **19 composable Skills** and **71 brand-grade Design Systems**.
 
 <p align="center">
   <img src="docs/assets/banner.png" alt="Open Design — editorial cover: design with the agent on your laptop" width="100%" />
@@ -14,15 +14,15 @@
   <a href="QUICKSTART.md"><img alt="Quickstart" src="https://img.shields.io/badge/quickstart-3%20commands-green" /></a>
 </p>
 
-<p align="center"><b>English</b> · <a href="README.zh-CN.md">简体中文</a></p>
+<p align="center"><b>English</b> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ko-KR.md">한국어</a></p>
 
 ---
 
 ## Why this exists
 
-Anthropic's [Claude Design][cd] (released 2026-04-17, Opus 4.7) showed what happens when an LLM stops writing prose and starts shipping design artifacts. It went viral — and stayed closed-source, paid-only, cloud-only, locked to Anthropic's model and Anthropic's skills. There is no checkout, no self-host, no Vercel deploy, no swap-in-your-own-agent.
+Anthropic's [Claude Design][cd] (released 2026-04-17, Opus 4.7) showed what happens when an LLM stops writing prose and starts shipping design artifacts. It went viral — and stayed closed-source, paid-only, cloud-only, locked to Anthropic's model and Anthropic's skills. There is no checkout, no local-first fork, no way to hand someone a GitHub URL and let their own agent run it.
 
-**Open Design (OD) is the open-source alternative.** Same loop, same artifact-first mental model, none of the lock-in. We don't ship an agent — the strongest coding agents already live on your laptop. We wire them into a skill-driven design workflow that runs on `pnpm dev`, deploys to Vercel, and stays BYOK at every layer.
+**Open Design (OD) is the open-source alternative.** Same loop, same artifact-first mental model, none of the lock-in. We don't ship an agent — the strongest coding agents already live on your laptop. We wire them into a skill-driven design workflow that runs locally with one `pnpm dev` command and stays BYOK at every layer.
 
 Type `make me a magazine-style pitch deck for our seed round`. The interactive question form pops up before the model improvises a single pixel. The agent picks one of five curated visual directions. A live `TodoWrite` plan streams into the UI. The daemon builds a real on-disk project folder with a seed template, layout library, and self-check checklist. The agent reads them — pre-flight enforced — runs a five-dimensional critique against its own output, and emits a single `<artifact>` that renders in a sandboxed iframe seconds later.
 
@@ -45,7 +45,7 @@ OD stands on four open-source shoulders:
 | **Visual directions** | 5 curated schools (Editorial Monocle · Modern Minimal · Tech Utility · Brutalist · Soft Warm) — each ships a deterministic OKLch palette + font stack |
 | **Device frames** | iPhone 15 Pro · Pixel · iPad Pro · MacBook · Browser Chrome — pixel-accurate, shared across screens |
 | **Agent runtime** | Local daemon spawns the CLI in your project folder — agent gets real `Read`, `Write`, `Bash`, `WebFetch` against a real on-disk environment |
-| **Deployable to** | Local (`pnpm dev`) · Vercel · Single-process prod (`npm start`) |
+| **Share / run model** | Share the GitHub repo URL · run locally with `pnpm dev` · single-process local prod with `pnpm start` |
 | **License** | Apache-2.0 |
 
 [acd2]: https://github.com/VoltAgent/awesome-design-md
@@ -257,10 +257,10 @@ Every layer is composable. Every layer is a file you can edit. Read [`src/prompt
 ## Quickstart
 
 ```bash
-git clone https://github.com/nexu-io/open-design.git
+git clone https://github.com/NewTurn2017/open-design.git
 cd open-design
-pnpm install         # or npm install
-pnpm dev:all         # daemon (:7456) + Vite (:5173)
+pnpm install
+pnpm dev             # starts daemon (:7456) + Vite (:5173), then opens the browser
 open http://localhost:5173
 ```
 
@@ -287,7 +287,7 @@ The daemon owns one hidden folder at the repo root. Everything in it is gitignor
 | Want to… | Do this |
 |---|---|
 | Inspect what's in there | `ls -la .od && sqlite3 .od/app.sqlite '.tables'` |
-| Reset to a clean slate | stop the daemon, `rm -rf .od`, run `pnpm dev:all` again |
+| Reset to a clean slate | stop the daemon, `rm -rf .od`, run `pnpm dev` again |
 | Move it elsewhere | not supported yet — the path is hard-coded relative to the repo |
 
 Full file map, scripts, and troubleshooting → [`QUICKSTART.md`](QUICKSTART.md).
@@ -298,7 +298,8 @@ Full file map, scripts, and troubleshooting → [`QUICKSTART.md`](QUICKSTART.md)
 open-design/
 ├── README.md                      ← this file
 ├── README.zh-CN.md                ← 简体中文
-├── QUICKSTART.md                  ← run / build / deploy guide
+├── README.ko-KR.md                ← 한국어
+├── QUICKSTART.md                  ← local run / build guide
 ├── package.json                   ← pnpm workspace, single bin: od
 │
 ├── daemon/                        ← Node + Express, the only server
@@ -463,7 +464,7 @@ The whole machinery below is the [`huashu-design`](https://github.com/alchaincyf
 |---|---|---|---|
 | License | Closed | MIT | **Apache-2.0** |
 | Form factor | Web (claude.ai) | Desktop (Electron) | **Web app + local daemon** |
-| Deployable on Vercel | ❌ | ❌ | **✅** |
+| GitHub-shareable local app | ❌ | ❌ | **✅** |
 | Agent runtime | Bundled (Opus 4.7) | Bundled ([`pi-ai`][piai]) | **Delegated to user's existing CLI** |
 | Skills | Proprietary | 12 custom TS modules + `SKILL.md` | **19 file-based [`SKILL.md`][skill] bundles, droppable** |
 | Design system | Proprietary | `DESIGN.md` (v0.2 roadmap) | **`DESIGN.md` × 71 systems shipped** |
@@ -528,8 +529,8 @@ Long-form provenance write-up — what we take from each, what we deliberately d
 - [x] SQLite-backed projects · conversations · messages · tabs · templates
 - [ ] Comment-mode surgical edits (click element → instruction → patch) — pattern from [`open-codesign`][ocod]
 - [ ] AI-emitted tweaks panel (model surfaces the parameters worth tweaking) — pattern from [`open-codesign`][ocod]
-- [ ] Vercel + tunnel deployment recipe (Topology B)
-- [ ] One-command `npx od init` to scaffold a project with `DESIGN.md`
+- [ ] Shareable local-first setup recipe for non-technical users
+- [ ] One-command `pnpm dlx od init` to scaffold a project with `DESIGN.md`
 - [ ] Skill marketplace (`od skills install <github-repo>`)
 
 Phased delivery → [`docs/roadmap.md`](docs/roadmap.md).
@@ -541,10 +542,10 @@ This is an early implementation — the closed loop (detect → pick skill + des
 ## Star us
 
 <p align="center">
-  <a href="https://github.com/nexu-io/open-design"><img src="docs/assets/star-us.png" alt="Star Open Design on GitHub — github.com/nexu-io/open-design" width="100%" /></a>
+  <a href="https://github.com/NewTurn2017/open-design"><img src="docs/assets/star-us.png" alt="Star Open Design on GitHub — github.com/NewTurn2017/open-design" width="100%" /></a>
 </p>
 
-If this saved you thirty minutes — give it a ★. Stars don't pay rent, but they tell the next designer, agent, and contributor that this experiment is worth their attention. One click, three seconds, real signal: [github.com/nexu-io/open-design](https://github.com/nexu-io/open-design).
+If this saved you thirty minutes — give it a ★. Stars don't pay rent, but they tell the next designer, agent, and contributor that this experiment is worth their attention. One click, three seconds, real signal: [github.com/NewTurn2017/open-design](https://github.com/NewTurn2017/open-design).
 
 ## Contributing
 

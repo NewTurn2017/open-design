@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useT } from '../i18n';
+import { useI18n, useT } from '../i18n';
+import { designSystemSubtitle, localizeDesignSystemCategory } from '../i18n/design-system-labels';
 import type { Dict } from '../i18n/types';
 import type {
   DesignSystemSummary,
@@ -422,7 +423,7 @@ function DesignSystemPicker({
   onChangeMulti: (v: boolean) => void;
   loading: boolean;
 }) {
-  const t = useT();
+  const { locale, t } = useI18n();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -447,13 +448,13 @@ function DesignSystemPicker({
       .sort((a, b) => {
         if (a.id === defaultDesignSystemId) return -1;
         if (b.id === defaultDesignSystemId) return 1;
-        const ca = a.category || 'Other';
-        const cb = b.category || 'Other';
+        const ca = localizeDesignSystemCategory(a.category || 'Other', locale);
+        const cb = localizeDesignSystemCategory(b.category || 'Other', locale);
         if (ca !== cb) return ca.localeCompare(cb);
         return a.title.localeCompare(b.title);
       });
     return [...picked, ...rest];
-  }, [designSystems, byId, selectedIds, defaultDesignSystemId]);
+  }, [designSystems, byId, selectedIds, defaultDesignSystemId, locale]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -462,10 +463,11 @@ function DesignSystemPicker({
       return (
         d.title.toLowerCase().includes(q) ||
         (d.summary || '').toLowerCase().includes(q) ||
-        (d.category || '').toLowerCase().includes(q)
+        (d.category || '').toLowerCase().includes(q) ||
+        localizeDesignSystemCategory(d.category, locale).toLowerCase().includes(q)
       );
     });
-  }, [ordered, query]);
+  }, [ordered, query, locale]);
 
   useEffect(() => {
     if (!open) return;
@@ -554,7 +556,7 @@ function DesignSystemPicker({
             {primary
               ? isDefault
                 ? t('common.default')
-                : primary.category || t('newproj.dsCategoryFallback')
+                : localizeDesignSystemCategory(primary.category, locale) || t('newproj.dsCategoryFallback')
               : t('newproj.dsNoneSubtitleEmpty')}
           </span>
         </span>
@@ -634,7 +636,7 @@ function DesignSystemPicker({
                         ? t('newproj.dsBadgeDefault')
                         : undefined
                     }
-                    subtitle={d.summary || d.category || ''}
+                    subtitle={designSystemSubtitle(d, locale)}
                   />
                 );
               })

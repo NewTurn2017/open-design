@@ -46,11 +46,11 @@ export function renderDesignSystemPreview(id, raw) {
   const renderedMarkdown = renderMarkdownLite(raw);
 
   return `<!doctype html>
-<html lang="en">
+<html lang="ko-KR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${escapeHtml(title)} — design system preview</title>
+  <title>${escapeHtml(title)} — 디자인 시스템 미리보기</title>
   <style>
     :root {
       --bg: ${bg};
@@ -235,7 +235,7 @@ export function renderDesignSystemPreview(id, raw) {
     ${subtitle ? `<p class="lede">${escapeHtml(subtitle)}</p>` : ''}
 
     <section>
-      <h2 class="section-title">Palette</h2>
+      <h2 class="section-title">팔레트</h2>
       <div class="palette">
         ${colors
           .slice(0, 12)
@@ -253,7 +253,7 @@ export function renderDesignSystemPreview(id, raw) {
     </section>
 
     <section>
-      <h2 class="section-title">Typography</h2>
+      <h2 class="section-title">타이포그래피</h2>
       <div class="typo-row">
         <span class="label">Display</span>
         <div class="typo-display">The grid carries weight; the line carries pace.</div>
@@ -269,7 +269,7 @@ export function renderDesignSystemPreview(id, raw) {
     </section>
 
     <section>
-      <h2 class="section-title">Components</h2>
+      <h2 class="section-title">컴포넌트</h2>
       <div class="components">
         <div class="card">
           <div class="eyebrow">Card</div>

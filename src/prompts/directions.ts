@@ -53,9 +53,9 @@ export interface DesignDirection {
 export const DESIGN_DIRECTIONS: DesignDirection[] = [
   {
     id: 'editorial-monocle',
-    label: 'Editorial — Monocle / FT magazine',
+    label: '에디토리얼 — Monocle / FT 매거진',
     mood:
-      'Print-magazine feel. Generous whitespace, large serif headlines, restrained palette of off-white paper + ink + a single warm accent. Confident, quietly intelligent.',
+      '인쇄 잡지 같은 분위기. 넉넉한 여백, 큰 세리프 헤드라인, 오프화이트 종이와 잉크, 하나의 따뜻한 액센트로 절제된 팔레트. 자신감 있고 차분하게 지적인 인상.',
     references: ['Monocle', 'The Financial Times Weekend', 'NYT Magazine', 'It\'s Nice That'],
     displayFont: "'Iowan Old Style', 'Charter', Georgia, serif",
     bodyFont:
@@ -77,9 +77,9 @@ export const DESIGN_DIRECTIONS: DesignDirection[] = [
   },
   {
     id: 'modern-minimal',
-    label: 'Modern minimal — Linear / Vercel',
+    label: '모던 미니멀 — Linear / Vercel',
     mood:
-      'Quiet, precise, software-native. System fonts, near-greyscale palette, a single saturated accent. The chrome disappears so content is the only thing that registers.',
+      '조용하고 정밀한 소프트웨어 네이티브 톤. 시스템 폰트, 거의 무채색에 가까운 팔레트, 하나의 선명한 액센트. UI 장식은 사라지고 콘텐츠만 또렷하게 남습니다.',
     references: ['Linear', 'Vercel', 'Notion 2024', 'Stripe docs'],
     displayFont:
       "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif",
@@ -103,9 +103,9 @@ export const DESIGN_DIRECTIONS: DesignDirection[] = [
   },
   {
     id: 'warm-soft',
-    label: 'Warm & soft — Stripe pre-2020 / Headspace',
+    label: '따뜻하고 부드러움 — Stripe pre-2020 / Headspace',
     mood:
-      'Cream backgrounds, soft accent, gentle radii. Reads like a thoughtful product magazine — friendly without being cute. Good for fintech, wellness, indie SaaS.',
+      '크림색 배경, 부드러운 액센트, 완만한 라운드. 귀엽기보다는 친근한, 사려 깊은 제품 매거진처럼 읽힙니다. 핀테크, 웰니스, 인디 SaaS에 잘 맞습니다.',
     references: ['Stripe pre-2020', 'Headspace', 'Substack', 'Mercury'],
     displayFont:
       "'Tiempos Headline', 'Newsreader', 'Iowan Old Style', Georgia, serif",
@@ -129,9 +129,9 @@ export const DESIGN_DIRECTIONS: DesignDirection[] = [
   },
   {
     id: 'tech-utility',
-    label: 'Tech / utility — Datadog / GitHub',
+    label: '테크 / 유틸리티 — Datadog / GitHub',
     mood:
-      'Data-dense, monospace-friendly, dark or light + grid. Made for engineers and operators who want information per square inch, not vibes.',
+      '데이터 밀도가 높고 모노스페이스와 잘 맞으며 다크/라이트 그리드에 적합합니다. 분위기보다 단위 면적당 정보량을 원하는 엔지니어와 운영자를 위한 방향입니다.',
     references: ['Datadog', 'GitHub', 'Cloudflare dashboard', 'Sentry'],
     displayFont:
       "-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif",
@@ -156,9 +156,9 @@ export const DESIGN_DIRECTIONS: DesignDirection[] = [
   },
   {
     id: 'brutalist-experimental',
-    label: 'Brutalist / experimental — Are.na / Yale',
+    label: '브루탈리스트 / 실험적 — Are.na / Yale',
     mood:
-      'Loud type. Visible grid. System sans + a single oversized serif. Deliberate ugliness as confidence. Great for art, indie, agency, manifesto pages.',
+      '강한 타이포그래피와 드러나는 그리드. 시스템 산세리프와 거대한 세리프 하나. 의도적인 거침을 자신감으로 씁니다. 아트, 인디, 에이전시, 선언문형 페이지에 좋습니다.',
     references: ['Are.na', 'Yale Center for British Art', 'mschf', 'Read.cv'],
     displayFont:
       "'Times New Roman', 'Iowan Old Style', Georgia, serif",
@@ -210,11 +210,11 @@ export function renderDirectionFormBody(): string {
 
   const form = {
     description:
-      'No brand to match — pick a visual direction. Each one ships with a real palette, font stack, and layout posture. You can override the accent below.',
+      '맞출 브랜드가 없다면 시각 방향을 선택하세요. 각 방향에는 실제 팔레트, 폰트 스택, 레이아웃 자세가 포함됩니다. 아래에서 액센트를 덮어쓸 수 있습니다.',
     questions: [
       {
         id: 'direction',
-        label: 'Direction',
+        label: '방향',
         type: 'direction-cards',
         required: true,
         options: DESIGN_DIRECTIONS.map((d) => d.id),
@@ -222,10 +222,10 @@ export function renderDirectionFormBody(): string {
       },
       {
         id: 'accent_override',
-        label: 'Accent override (optional)',
+        label: '액센트 재지정(선택 사항)',
         type: 'text',
         placeholder:
-          'e.g. "use moss green instead of cobalt", "no orange — too brand-y for us"',
+          '예: "코발트 대신 모스 그린 사용", "오렌지는 브랜드 느낌이 너무 강해서 제외"',
       },
     ],
   };

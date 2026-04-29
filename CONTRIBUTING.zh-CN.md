@@ -18,7 +18,7 @@
 | 加功能、修 bug、从 [`open-codesign`][ocod] 移植一个 UX 模式 | 代码 | `src/`、`daemon/` | 普通 PR |
 | 改文档、补中文翻译、修错别字 | 文档 | `README.md`、`README.zh-CN.md`、`docs/`、`QUICKSTART.md` | 一个 PR |
 
-不确定自己想做的属于哪一桶？[先开 issue / discussion](https://github.com/nexu-io/open-design/issues/new)，我们告诉你该改哪个面。
+不确定自己想做的属于哪一桶？[先开 issue / discussion](https://github.com/NewTurn2017/open-design/issues/new)，我们告诉你该改哪个面。
 
 ---
 
@@ -27,10 +27,10 @@
 完整的一页式 setup 在 [`QUICKSTART.md`](QUICKSTART.md)。给贡献者的 TL;DR：
 
 ```bash
-git clone https://github.com/nexu-io/open-design.git
+git clone https://github.com/NewTurn2017/open-design.git
 cd open-design
-pnpm install              # 或 npm install
-pnpm dev:all              # daemon (:7456) + Vite (:5173)
+pnpm install
+pnpm dev                  # daemon (:7456) + Vite (:5173) + 打开浏览器
 pnpm typecheck            # tsc -b --noEmit
 pnpm build                # 生产构建
 ```
@@ -224,7 +224,7 @@ design-systems/your-brand/
 
 开 issue 时请带上：
 
-- 你跑的命令（精确到 `pnpm dev:all` / `npm start`）。
+- 你跑的命令（精确到 `pnpm dev` / `pnpm start`）。
 - 选中的 agent CLI 是哪个（或者你走的是 BYOK 路径）。
 - 触发问题时的 skill + design system 组合。
 - 相关的 **daemon stderr 末尾几行** —— 大多数「artifact 没渲染出来」的报告，看到 `spawn ENOENT` 或 CLI 实际报错后 30 秒就能定位。
@@ -236,7 +236,7 @@ design-systems/your-brand/
 
 ## 提问
 
-- 架构问题、设计问题、「这是 bug 还是误用」 → 请用 [GitHub Discussions](https://github.com/nexu-io/open-design/discussions)（首选 —— 下一个人能搜到）。
+- 架构问题、设计问题、「这是 bug 还是误用」 → 请用 [GitHub Discussions](https://github.com/NewTurn2017/open-design/discussions)（首选 —— 下一个人能搜到）。
 - 「我想写一个干 X 的 skill 怎么写」 → 开一个 discussion。我们会回答，且如果是缺失的模式，答案会被收进 [`docs/skills-protocol.md`](docs/skills-protocol.md)。
 
 ---
@@ -247,7 +247,7 @@ design-systems/your-brand/
 
 - **Vendor 一个模型运行时。** OD 整个赌注就是「你已有的 CLI 就够了」。我们不带 `pi-ai`、不带 OpenAI key、不带模型加载器。
 - **给前端加一个新框架。** Vite + React 18 + TS 是底线。不要 Next.js / Astro / Solid / Svelte 改写。
-- **把 daemon 换成 serverless function。** Daemon 的存在意义就是拥有真实的 `cwd` 和 spawn 真实的 CLI。SPA 部署 Vercel 没问题，daemon 仍然是 daemon。
+- **把 daemon 换成 serverless function。** Daemon 的存在意义就是拥有真实的 `cwd` 和 spawn 真实的 CLI。静态托管可以展示 SPA，但真正的产品仍然是本地优先，因为 daemon 必须继续作为 daemon 存在。
 - **加 telemetry / 分析 / phone-home。** OD 是 local-first。唯一的对外请求是用户明确配置的 provider。
 - **打包二进制** 而没有附 license 文件和原作者归属。
 

@@ -2,7 +2,7 @@
 // Sync design-systems/* from the upstream `getdesign` npm package.
 //
 // Usage:
-//   1) curl -sL $(npm view getdesign dist.tarball) -o /tmp/getdesign.tgz
+//   1) curl -sL $(pnpm view getdesign dist.tarball) -o /tmp/getdesign.tgz
 //      tar -xzf /tmp/getdesign.tgz -C /tmp
 //   2) node scripts/sync-design-systems.mjs [/tmp/package/templates]
 //

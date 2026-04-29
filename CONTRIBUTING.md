@@ -18,7 +18,7 @@ This guide tells you exactly where to look for each type of contribution and wha
 | Add a feature, fix a bug, lift a UX pattern from [`open-codesign`][ocod] | code | `src/`, `daemon/` | normal PR |
 | Improve docs, port a section to 中文, fix typos | docs | `README.md`, `README.zh-CN.md`, `docs/`, `QUICKSTART.md` | one PR |
 
-If you're not sure which bucket your idea is in, [open a discussion / issue first](https://github.com/nexu-io/open-design/issues/new) and we'll point you at the right surface.
+If you're not sure which bucket your idea is in, [open a discussion / issue first](https://github.com/NewTurn2017/open-design/issues/new) and we'll point you at the right surface.
 
 ---
 
@@ -27,10 +27,10 @@ If you're not sure which bucket your idea is in, [open a discussion / issue firs
 The full one-page setup lives in [`QUICKSTART.md`](QUICKSTART.md). The TL;DR for contributors:
 
 ```bash
-git clone https://github.com/nexu-io/open-design.git
+git clone https://github.com/NewTurn2017/open-design.git
 cd open-design
-pnpm install              # or npm install
-pnpm dev:all              # daemon (:7456) + Vite (:5173)
+pnpm install
+pnpm dev                  # daemon (:7456) + Vite (:5173) + browser open
 pnpm typecheck            # tsc -b --noEmit
 pnpm build                # production build
 ```
@@ -225,7 +225,7 @@ We don't enforce a CLA. Apache-2.0 covers us; your contribution is licensed unde
 
 Open an issue with:
 
-- What you ran (the exact `pnpm dev:all` / `npm start` invocation).
+- What you ran (the exact `pnpm dev` / `pnpm start` invocation).
 - Which agent CLI was selected (or whether you were on the BYOK path).
 - The skill + design system pair that triggered it.
 - The relevant **daemon stderr tail** — most "the artifact never rendered" reports get diagnosed in 30 seconds when we can see `spawn ENOENT` or the CLI's actual error.
@@ -237,7 +237,7 @@ For prompt-stack bugs ("the agent emitted a purple gradient hero, the slop black
 
 ## Asking questions
 
-- Architecture question, design question, "is this a bug or a misuse" → [GitHub Discussions](https://github.com/nexu-io/open-design/discussions) (preferred — searchable for the next person).
+- Architecture question, design question, "is this a bug or a misuse" → [GitHub Discussions](https://github.com/NewTurn2017/open-design/discussions) (preferred — searchable for the next person).
 - "How do I write a skill that does X" → Open a discussion. We'll answer it and turn the answer into [`docs/skills-protocol.md`](docs/skills-protocol.md) if it's a missing pattern.
 
 ---
@@ -248,7 +248,7 @@ To keep the project focused, please don't open PRs that:
 
 - **Vendor a model runtime.** OD's whole bet is "your existing CLI is enough". We don't ship `pi-ai`, OpenAI keys, or model loaders.
 - **Add a new framework to the frontend.** Vite + React 18 + TS is the line. No Next.js, Astro, Solid, Svelte rewrites.
-- **Replace the daemon with a serverless function.** The daemon's whole point is owning a real `cwd` and spawning a real CLI. Vercel deployment of the SPA is fine; the daemon stays a daemon.
+- **Replace the daemon with a serverless function.** The daemon's whole point is owning a real `cwd` and spawning a real CLI. Static hosting can show the SPA, but the real product stays local-first because the daemon must remain a daemon.
 - **Add telemetry / analytics / phone-home.** OD is local-first. The only outbound calls are to providers the user explicitly configured.
 - **Bundle a binary** without a license file and authorship attribution next to it.
 

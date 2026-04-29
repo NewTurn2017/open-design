@@ -5,9 +5,8 @@ Run the full product locally.
 ## One-shot (dev mode)
 
 ```bash
-npm install
-npm run dev:all        # starts daemon (:7456) + Vite (:5173) together
-open http://localhost:5173
+pnpm install
+pnpm dev            # starts daemon (:7456) + Vite (:5173), then opens the browser
 ```
 
 On first load, the app detects your installed code-agent CLI (Claude Code / Codex / Gemini / OpenCode / Cursor Agent / Qwen), picks it automatically, and defaults to `web-prototype` skill + `Neutral Modern` design system. Type a prompt and hit **Send**. The agent streams into the left pane; the `<artifact>` tag is parsed out and the HTML renders live on the right. When it finishes, click **Save to disk** to persist the artifact under `./.od/artifacts/<timestamp>-<slug>/index.html`.
@@ -24,11 +23,11 @@ Pair a skill with a design system and a single prompt produces a layout-appropri
 ## Other scripts
 
 ```bash
-npm run daemon         # just the daemon (no web UI build)
-npm run dev            # just Vite (fails /api calls unless daemon is up)
-npm run build          # production build of the frontend → dist/
-npm run start          # build + daemon serving dist/ (single-process prod mode)
-npm run typecheck      # tsc -b --noEmit
+pnpm daemon         # just the daemon (no web UI build)
+pnpm dev            # full local app: daemon + Vite + browser open
+pnpm build          # production build of the frontend → dist/
+pnpm start          # build + daemon serving dist/ (single-process local prod mode)
+pnpm typecheck      # tsc -b --noEmit
 ```
 
 For the daemon-only production mode, the daemon serves the built SPA itself at `http://localhost:7456`, so no proxy involved.
@@ -59,7 +58,7 @@ Swap the skill or the design system in the top bar and the next send uses the ne
 ```
 open-design/
 ├── daemon/                    # Node/Express — spawns local agents + serves APIs
-│   ├── cli.js                 # `od` bin entry (also used by npm scripts)
+│   ├── cli.js                 # `od` bin entry (also used by package scripts)
 │   ├── server.js              # /api/agents /api/skills /api/design-systems /api/chat /api/upload /api/artifacts/save
 │   ├── agents.js              # PATH scanner for claude/codex/gemini/opencode/cursor-agent/qwen
 │   ├── skills.js              # SKILL.md loader (frontmatter parser)

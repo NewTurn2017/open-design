@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { designSystemSubtitle } from '../i18n/design-system-labels';
 import {
   fetchDesignSystemPreview,
   fetchDesignSystemShowcase,
@@ -16,7 +17,7 @@ interface Props {
 // tokens, and the original Tokens view (palette / typography / components +
 // rendered DESIGN.md prose).
 export function DesignSystemPreviewModal({ system, onClose }: Props) {
-  const t = useT();
+  const { locale, t } = useI18n();
   const [showcaseHtml, setShowcaseHtml] = useState<string | null | undefined>(undefined);
   const [tokensHtml, setTokensHtml] = useState<string | null | undefined>(undefined);
 
@@ -45,7 +46,7 @@ export function DesignSystemPreviewModal({ system, onClose }: Props) {
   return (
     <PreviewModal
       title={system.title}
-      subtitle={system.summary || system.category}
+      subtitle={designSystemSubtitle(system, locale)}
       views={[
         { id: 'showcase', label: t('ds.showcase'), html: showcaseHtml },
         { id: 'tokens', label: t('ds.tokens'), html: tokensHtml },

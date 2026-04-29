@@ -13,7 +13,7 @@ export function renderDesignSystemShowcase(id, raw) {
   const titleMatch = /^#\s+(.+?)\s*$/m.exec(raw);
   const rawTitle = titleMatch?.[1] ?? id;
   const title = cleanTitle(rawTitle);
-  const subtitle = extractSubtitle(raw) || 'A design system rendered as a real product surface.';
+  const subtitle = extractSubtitle(raw) || '실제 제품 화면처럼 렌더링한 디자인 시스템입니다.';
   const colors = extractColors(raw);
   const fonts = extractFonts(raw);
 
@@ -48,11 +48,11 @@ export function renderDesignSystemShowcase(id, raw) {
   const tagline = oneLine(subtitle).slice(0, 120);
 
   return `<!doctype html>
-<html lang="en">
+<html lang="ko-KR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${escapeHtml(productName)} — showcase</title>
+  <title>${escapeHtml(productName)} — 쇼케이스</title>
   <style>
     :root {
       --bg: ${bg};
@@ -152,7 +152,7 @@ export function renderDesignSystemShowcase(id, raw) {
     .logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 44px; align-items: center; opacity: 0.85; }
     .logo-pill { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; color: var(--muted); }
 
-    /* Features grid */
+    /* 기능 grid */
     .section { padding: 96px 0; }
     .section-eyebrow { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: var(--accent); margin-bottom: 12px; }
     .section-title { font-family: var(--display); font-size: clamp(32px, 4.2vw, 48px); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 18px; max-width: 22ch; font-weight: 700; }
@@ -177,7 +177,7 @@ export function renderDesignSystemShowcase(id, raw) {
     .feature h3 { font-family: var(--display); font-size: 18px; margin: 0; letter-spacing: -0.01em; }
     .feature p { color: var(--muted); margin: 0; font-size: 14.5px; line-height: 1.55; }
 
-    /* Product preview / dashboard mock */
+    /* 제품 preview / dashboard mock */
     .preview-wrap { padding-top: 24px; padding-bottom: 96px; }
     .preview-frame {
       background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
@@ -219,7 +219,7 @@ export function renderDesignSystemShowcase(id, raw) {
     .list-card .head { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 16px; border-bottom: 1px solid var(--border); }
     .list-card .head h5 { margin: 0; font-size: 14px; }
 
-    /* Pricing */
+    /* 가격 */
     .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     @media (max-width: 920px) { .pricing { grid-template-columns: 1fr; } }
     .price-card {
@@ -287,11 +287,11 @@ export function renderDesignSystemShowcase(id, raw) {
     <div class="container nav-row">
       <a class="brand" href="#"><span class="brand-mark"></span>${escapeHtml(productName)}</a>
       <nav class="nav-links">
-        <a href="#features">Product</a>
+        <a href="#features">제품</a>
         <a href="#preview">Workspace</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">Docs</a>
-        <a href="#faq">Customers</a>
+        <a href="#pricing">가격</a>
+        <a href="#faq">문서</a>
+        <a href="#faq">고객</a>
       </nav>
       <div class="nav-spacer"></div>
       <a class="nav-link-cta" href="#">Sign in</a>
@@ -302,24 +302,24 @@ export function renderDesignSystemShowcase(id, raw) {
   <main>
     <section class="hero">
       <div class="container">
-        <div class="hero-eyebrow"><span class="dot"></span>${escapeHtml(productName)} · live preview</div>
-        <h1>The system that makes <em>${escapeHtml(productName)}</em> feel like ${escapeHtml(productName)}.</h1>
+        <div class="hero-eyebrow"><span class="dot"></span>${escapeHtml(productName)} · 라이브 미리보기</div>
+        <h1><em>${escapeHtml(productName)}</em>답게 느껴지도록 만드는 시스템.</h1>
         <p class="lede">${escapeHtml(tagline)}</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#">Start a free trial →</a>
-          <a class="btn btn-ghost" href="#preview">See it in action</a>
+          <a class="btn btn-primary" href="#">무료로 시작하기 →</a>
+          <a class="btn btn-ghost" href="#preview">실제 화면 보기</a>
         </div>
         <div class="hero-meta">
-          <span><strong>4.9</strong> · App Store rating</span>
-          <span><strong>SOC 2</strong> · Type II compliant</span>
-          <span><strong>120k+</strong> active teams</span>
+          <span><strong>4.9</strong> · App Store 평점</span>
+          <span><strong>SOC 2</strong> · Type II 준수</span>
+          <span><strong>120k+</strong> 활성 팀</span>
         </div>
       </div>
     </section>
 
     <section class="logos">
       <div class="container">
-        <div class="logos-label">Trusted by teams shipping serious work</div>
+        <div class="logos-label">중요한 일을 출시하는 팀들이 신뢰합니다</div>
         <div class="logos-row">
           <span class="logo-pill">Northwind</span>
           <span class="logo-pill">Pioneer</span>
@@ -333,55 +333,55 @@ export function renderDesignSystemShowcase(id, raw) {
 
     <section class="section" id="features">
       <div class="container">
-        <div class="section-eyebrow">What it does</div>
-        <h2 class="section-title">Every primitive a fast team needs.</h2>
-        <p class="section-lede">A system styled entirely from the tokens of ${escapeHtml(productName)} — palette, typography, surfaces, and motion. Drop it into any product and it stays in character.</p>
+        <div class="section-eyebrow">기능</div>
+        <h2 class="section-title">빠른 팀에 필요한 모든 기본 요소.</h2>
+        <p class="section-lede">${escapeHtml(productName)}의 토큰만으로 스타일링된 시스템입니다 — 팔레트, 타이포그래피, 표면, 모션까지. 어떤 제품에 넣어도 고유한 인상이 유지됩니다.</p>
         <div class="features">
-          ${featureCard('★', 'Tokens that compose', 'Color, type, spacing, and elevation defined once and reused across every surface — from a marketing hero to a row in a table.')}
-          ${featureCard('◐', 'Light & dark in lockstep', 'Every component ships with both modes. The accent reads as confident in either context, and contrast meets WCAG AA out of the box.')}
-          ${featureCard('⌘', 'Desktop-first, but mobile-honest', 'Layouts collapse from a 12-column desktop grid to a focused single column without losing density or rhythm.')}
-          ${featureCard('▣', 'Production-grade primitives', '40+ components — from the obvious (button, input) to the load-bearing (data table, command bar, empty states).')}
-          ${featureCard('↗', 'Designed for handoff', 'Every spec carries a Figma frame, a code snippet, and a "do/don’t" pair so engineers don’t have to guess.')}
-          ${featureCard('∞', 'Built to evolve', 'Tokens version semver-style. A palette refresh ships through one file — no component code touches.')}
+          ${featureCard('★', '조합되는 토큰', '색상, 타이포, 간격, 깊이를 한 번 정의하고 마케팅 히어로부터 테이블 행까지 모든 표면에서 재사용합니다.')}
+          ${featureCard('◐', '라이트와 다크를 함께 설계', '모든 컴포넌트가 두 모드를 함께 제공합니다. 어느 맥락에서도 액센트는 또렷하고, 기본 대비는 WCAG AA를 만족합니다.')}
+          ${featureCard('⌘', '데스크톱 우선, 모바일도 정직하게', '12컬럼 데스크톱 그리드가 밀도와 리듬을 잃지 않고 집중된 단일 컬럼으로 접힙니다.')}
+          ${featureCard('▣', '프로덕션급 기본 요소', '버튼과 입력 같은 기본 요소부터 데이터 테이블, 커맨드 바, 빈 상태처럼 핵심을 지탱하는 요소까지 40개 이상의 컴포넌트.')}
+          ${featureCard('↗', '핸드오프를 고려한 설계', '모든 스펙에 Figma 프레임, 코드 스니펫, 해야 할 것/하지 말아야 할 것 쌍이 포함되어 엔지니어가 추측할 필요가 없습니다.')}
+          ${featureCard('∞', '진화하도록 설계', '토큰은 semver 방식으로 버전 관리됩니다. 팔레트 변경은 한 파일로 배포되고 컴포넌트 코드는 건드리지 않습니다.')}
         </div>
       </div>
     </section>
 
     <section class="preview-wrap" id="preview">
       <div class="container">
-        <div class="section-eyebrow">In production</div>
-        <h2 class="section-title">A workspace, fully styled.</h2>
-        <p class="section-lede">This is the same component library you'd use in your app — rendered with ${escapeHtml(productName)} tokens.</p>
+        <div class="section-eyebrow">프로덕션 화면</div>
+        <h2 class="section-title">완전히 스타일링된 워크스페이스.</h2>
+        <p class="section-lede">앱에서 사용할 동일한 컴포넌트 라이브러리를 ${escapeHtml(productName)} 토큰으로 렌더링한 화면입니다.</p>
         <div class="preview-frame">
           <div class="preview-titlebar"><span></span><span></span><span></span></div>
           <div class="preview-app">
             <aside class="preview-side">
               <div class="brand" style="margin-bottom: 14px;"><span class="brand-mark"></span>${escapeHtml(productName)}</div>
-              <a class="side-link active"><span class="dot"></span>Overview</a>
-              <a class="side-link">Customers</a>
-              <a class="side-link">Pipeline</a>
-              <a class="side-link">Reports</a>
-              <a class="side-link">Automations</a>
-              <div class="side-section">Workspaces</div>
-              <a class="side-link">Growth</a>
-              <a class="side-link">Lifecycle</a>
-              <a class="side-link">Finance</a>
+              <a class="side-link active"><span class="dot"></span>개요</a>
+              <a class="side-link">고객</a>
+              <a class="side-link">파이프라인</a>
+              <a class="side-link">리포트</a>
+              <a class="side-link">자동화</a>
+              <div class="side-section">워크스페이스</div>
+              <a class="side-link">성장</a>
+              <a class="side-link">라이프사이클</a>
+              <a class="side-link">재무</a>
             </aside>
             <div class="preview-main">
               <div class="preview-head">
-                <h4>Overview</h4>
-                <span class="badge up">↑ 12.4% this week</span>
+                <h4>개요</h4>
+                <span class="badge up">↑ 이번 주 12.4%</span>
               </div>
               <div class="kpi-row">
                 ${kpi('MRR', '$184,210', '+8.2%')}
-                ${kpi('Active orgs', '2,914', '+121')}
-                ${kpi('Conversion', '4.6%', '+0.4 pp')}
-                ${kpi('Net retention', '113%', '+2 pp')}
+                ${kpi('활성 조직', '2,914', '+121')}
+                ${kpi('전환율', '4.6%', '+0.4 pp')}
+                ${kpi('순 리텐션', '113%', '+2 pp')}
               </div>
               <div class="chart-card">
                 <div class="chart-head">
-                  <span class="title">Revenue · last 12 weeks</span>
-                  <span class="meta">USD · weekly</span>
+                  <span class="title">매출 · 최근 12주</span>
+                  <span class="meta">USD · 주간</span>
                 </div>
                 <div class="chart">
                   ${inlineLineChart()}
@@ -390,23 +390,23 @@ export function renderDesignSystemShowcase(id, raw) {
               <div class="preview-row-2">
                 <div class="list-card">
                   <div class="head">
-                    <h5>Top accounts</h5>
-                    <span class="badge">View all</span>
+                    <h5>상위 계정</h5>
+                    <span class="badge">전체 보기</span>
                   </div>
-                  ${listRow('Northwind Trading', 'Annual · NA', '$48,200', 'up')}
-                  ${listRow('Pioneer Robotics', 'Quarterly · EMEA', '$31,890', 'up')}
-                  ${listRow('Atlas Cooperative', 'Annual · APAC', '$22,400', '')}
-                  ${listRow('Foundry Group', 'Monthly · NA', '$14,750', 'up')}
+                  ${listRow('Northwind Trading', '연간 · 북미', '$48,200', 'up')}
+                  ${listRow('Pioneer Robotics', '분기 · EMEA', '$31,890', 'up')}
+                  ${listRow('Atlas Cooperative', '연간 · APAC', '$22,400', '')}
+                  ${listRow('Foundry Group', '월간 · 북미', '$14,750', 'up')}
                 </div>
                 <div class="list-card">
                   <div class="head">
-                    <h5>Activity</h5>
-                    <span class="badge">Live</span>
+                    <h5>활동</h5>
+                    <span class="badge">실시간</span>
                   </div>
-                  ${activityRow('Renewal closed', 'Lattice · 11m ago')}
-                  ${activityRow('Trial started', 'Voltage · 22m ago')}
-                  ${activityRow('Plan upgraded', 'Pioneer · 1h ago')}
-                  ${activityRow('Invoice paid', 'Atlas · 2h ago')}
+                  ${activityRow('갱신 완료', 'Lattice · 11분 전')}
+                  ${activityRow('체험 시작', 'Voltage · 22분 전')}
+                  ${activityRow('플랜 업그레이드', 'Pioneer · 1시간 전')}
+                  ${activityRow('인보이스 결제됨', 'Atlas · 2시간 전')}
                 </div>
               </div>
             </div>
@@ -417,21 +417,21 @@ export function renderDesignSystemShowcase(id, raw) {
 
     <section class="section" id="pricing" style="padding-top: 24px;">
       <div class="container">
-        <div class="section-eyebrow">Pricing</div>
-        <h2 class="section-title">Built for teams of one to one thousand.</h2>
-        <p class="section-lede">Pick the plan that matches the way your team ships. Every tier ships the full token system.</p>
+        <div class="section-eyebrow">가격</div>
+        <h2 class="section-title">1명부터 1,000명 규모의 팀까지.</h2>
+        <p class="section-lede">팀의 출시 방식에 맞는 플랜을 선택하세요. 모든 플랜에는 전체 토큰 시스템이 포함됩니다.</p>
         <div class="pricing">
-          ${priceCard('Starter', '$0', 'Free forever', ['Single user', 'All core tokens', 'Up to 3 projects', 'Community support'])}
-          ${priceCard('Team', '$24', 'per seat / month', ['Unlimited projects', 'Real-time co-edit', 'Brand themes', 'Priority email support'], true)}
-          ${priceCard('Enterprise', 'Custom', 'volume pricing', ['SSO + SCIM', 'Audit logs', 'Custom token schemas', 'Dedicated success manager'])}
+          ${priceCard('스타터', '$0', '영구 무료', ['단일 사용자', '모든 핵심 토큰', '최대 3개 프로젝트', '커뮤니티 지원'])}
+          ${priceCard('팀', '$24', '좌석당 / 월', ['무제한 프로젝트', '실시간 공동 편집', '브랜드 테마', '우선 이메일 지원'], true)}
+          ${priceCard('엔터프라이즈', '맞춤형', '볼륨 가격', ['SSO + SCIM', '감사 로그', '맞춤 토큰 스키마', '전담 성공 매니저'])}
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="section-eyebrow">Customers</div>
-        <h2 class="section-title">Loved by teams who care about craft.</h2>
+        <div class="section-eyebrow">고객</div>
+        <h2 class="section-title">완성도를 중시하는 팀이 사랑하는 경험.</h2>
         <div class="quotes">
           ${quote('"Our marketing site, our app, and our internal dashboards finally feel like the same product. The token system is doing all the work."', 'Mira Okafor', 'Head of Design · Pioneer')}
           ${quote('"We swapped our entire design language in an afternoon. Nothing broke. That’s the line, and we crossed it."', 'Caleb Renner', 'Engineering Lead · Northwind')}
@@ -442,12 +442,12 @@ export function renderDesignSystemShowcase(id, raw) {
     <section class="section" id="faq" style="padding-top: 24px;">
       <div class="container">
         <div class="section-eyebrow">FAQ</div>
-        <h2 class="section-title">Questions, answered.</h2>
+        <h2 class="section-title">자주 묻는 질문.</h2>
         <div class="faq">
-          ${faq('Is this a Figma library, a code library, or both?', 'Both. Tokens flow from one source of truth into Figma styles and into the codegen pipeline at the same time.')}
-          ${faq('Can we ship our own brand theme?', 'Yes — fork the token file, change the palette and type stack, and every component reskins automatically.')}
-          ${faq('What about accessibility?', 'Color contrast meets WCAG AA on every surface. Components ship with focus rings, ARIA roles, and keyboard handling.')}
-          ${faq('How do you handle dark mode?', 'Every token has a paired dark value. The system flips at the document level — no per-component overrides needed.')}
+          ${faq('Figma 라이브러리인가요, 코드 라이브러리인가요, 둘 다인가요?', '둘 다입니다. 토큰은 하나의 진실 공급원에서 Figma 스타일과 코드 생성 파이프라인으로 동시에 흐릅니다.')}
+          ${faq('우리만의 브랜드 테마를 배포할 수 있나요?', '네. 토큰 파일을 포크해 팔레트와 타입 스택을 바꾸면 모든 컴포넌트가 자동으로 다시 스킨됩니다.')}
+          ${faq('접근성은 어떤가요?', '모든 표면의 색상 대비가 WCAG AA를 만족합니다. 컴포넌트에는 포커스 링, ARIA 역할, 키보드 처리가 포함됩니다.')}
+          ${faq('다크 모드는 어떻게 처리하나요?', '모든 토큰에는 짝이 되는 다크 값이 있습니다. 시스템은 문서 레벨에서 전환되며 컴포넌트별 오버라이드가 필요 없습니다.')}
         </div>
       </div>
     </section>
@@ -456,12 +456,12 @@ export function renderDesignSystemShowcase(id, raw) {
       <div class="container">
         <div class="cta">
           <div>
-            <h2>Ship a product that finally feels finished.</h2>
-            <p>Drop the system into your app today. The first project is on us.</p>
+            <h2>마침내 완성된 느낌의 제품을 출시하세요.</h2>
+            <p>오늘 바로 앱에 시스템을 적용하세요. 첫 프로젝트는 무료입니다.</p>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a class="btn btn-primary" href="#">Start free trial</a>
-            <a class="btn btn-secondary" href="#">Talk to sales</a>
+            <a class="btn btn-primary" href="#">무료로 시작하기</a>
+            <a class="btn btn-secondary" href="#">세일즈 문의</a>
           </div>
         </div>
       </div>
@@ -475,13 +475,13 @@ export function renderDesignSystemShowcase(id, raw) {
           <div class="brand" style="margin-bottom: 12px;"><span class="brand-mark"></span>${escapeHtml(productName)}</div>
           <p style="margin: 0; max-width: 38ch;">${escapeHtml(tagline)}</p>
         </div>
-        <div class="footer-col"><h6>Product</h6><a href="#">Features</a><a href="#">Pricing</a><a href="#">Changelog</a><a href="#">Roadmap</a></div>
-        <div class="footer-col"><h6>Company</h6><a href="#">About</a><a href="#">Customers</a><a href="#">Careers</a><a href="#">Press</a></div>
-        <div class="footer-col"><h6>Resources</h6><a href="#">Docs</a><a href="#">Status</a><a href="#">Brand</a><a href="#">Contact</a></div>
+        <div class="footer-col"><h6>제품</h6><a href="#">기능</a><a href="#">가격</a><a href="#">변경 내역</a><a href="#">로드맵</a></div>
+        <div class="footer-col"><h6>회사</h6><a href="#">소개</a><a href="#">고객</a><a href="#">채용</a><a href="#">보도자료</a></div>
+        <div class="footer-col"><h6>리소스</h6><a href="#">문서</a><a href="#">상태</a><a href="#">브랜드</a><a href="#">문의</a></div>
       </div>
       <div class="footer-bottom">
-        <span>© ${new Date().getFullYear()} ${escapeHtml(productName)}. All rights reserved.</span>
-        <span>Showcase rendered from <code style="font-family: var(--mono);">design-systems/${escapeHtml(id)}/DESIGN.md</code></span>
+        <span>© ${new Date().getFullYear()} ${escapeHtml(productName)}. 모든 권리 보유.</span>
+        <span>쇼케이스 원본: <code style="font-family: var(--mono);">design-systems/${escapeHtml(id)}/DESIGN.md</code></span>
       </div>
     </div>
   </footer>

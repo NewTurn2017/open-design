@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { useT } from '../i18n';
+import { useI18n } from '../i18n';
+import { designSystemSubtitle, localizeDesignSystemCategory } from '../i18n/design-system-labels';
 import type { DesignSystemSummary } from '../types';
 
 interface Props {
@@ -23,7 +24,7 @@ const CATEGORY_ORDER = [
 ];
 
 export function DesignSystemsTab({ systems, selectedId, onSelect, onPreview }: Props) {
-  const t = useT();
+  const { locale, t } = useI18n();
   const [filter, setFilter] = useState('');
   const [category, setCategory] = useState<string>('All');
 
@@ -43,19 +44,16 @@ export function DesignSystemsTab({ systems, selectedId, onSelect, onPreview }: P
       if (!q) return true;
       return (
         s.title.toLowerCase().includes(q) ||
-        s.summary.toLowerCase().includes(q)
+        s.summary.toLowerCase().includes(q) ||
+        localizeDesignSystemCategory(s.category, locale).toLowerCase().includes(q)
       );
     });
-  }, [systems, filter, category]);
+  }, [systems, filter, category, locale]);
 
-  // The category metadata coming from each design system is authored in
-  // English. We translate the well-known buckets (All / Uncategorized) but
-  // pass the rest through unchanged so user-facing labels stay aligned with
-  // the underlying tags.
   const renderCategory = (c: string) => {
     if (c === 'All') return t('ds.categoryAll');
     if (c === 'Uncategorized') return t('ds.categoryUncategorized');
-    return c;
+    return localizeDesignSystemCategory(c, locale);
   };
 
   return (
@@ -95,7 +93,7 @@ export function DesignSystemsTab({ systems, selectedId, onSelect, onPreview }: P
                       </span>
                     ) : null}
                   </div>
-                  <div className="ds-row-summary">{s.summary || s.category}</div>
+                  <div className="ds-row-summary">{designSystemSubtitle(s, locale)}</div>
                 </div>
                 {s.swatches && s.swatches.length > 0 ? (
                   <div className="ds-row-swatches" aria-hidden>

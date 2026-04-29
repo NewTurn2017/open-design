@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import { en } from './locales/en';
+import { koKR } from './locales/ko-KR';
 import { zhCN } from './locales/zh-CN';
 import { LOCALES, type Dict, type Locale } from './types';
 
@@ -17,17 +18,18 @@ export type { Locale } from './types';
 type DictKey = keyof Dict;
 
 const DICTS: Record<Locale, Dict> = {
+  'ko-KR': koKR,
   'en': en,
   'zh-CN': zhCN,
 };
 
 const LS_KEY = 'open-design:locale';
 
-// First-run default is English. We honor an explicit user pick saved to
-// localStorage but never auto-detect from `navigator.language`, so the
-// initial experience is consistent and predictable.
+// First-run default is Korean for this fork. We honor an explicit user pick
+// saved to localStorage but never auto-detect from `navigator.language`, so
+// the initial experience is consistent and predictable.
 function detectInitialLocale(): Locale {
-  if (typeof window === 'undefined') return 'en';
+  if (typeof window === 'undefined') return 'ko-KR';
   try {
     const stored = window.localStorage.getItem(LS_KEY);
     if (stored && (LOCALES as string[]).includes(stored)) {
@@ -36,7 +38,7 @@ function detectInitialLocale(): Locale {
   } catch {
     /* ignore */
   }
-  return 'en';
+  return 'ko-KR';
 }
 
 interface I18nContextValue {

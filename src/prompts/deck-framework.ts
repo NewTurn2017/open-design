@@ -36,7 +36,7 @@
  */
 
 export const DECK_SKELETON_HTML = `<!doctype html>
-<html lang="en">
+<html lang="ko-KR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -205,7 +205,7 @@ export const DECK_SKELETON_HTML = `<!doctype html>
            slide must have class="slide active". The framework auto-counts
            them and toggles .active as the user navigates. -->
 
-      <section class="slide active" data-screen-label="01 Title">
+      <section class="slide active" data-screen-label="01 제목">
         <!-- SLOT: slide 1 content -->
       </section>
 
@@ -220,12 +220,12 @@ export const DECK_SKELETON_HTML = `<!doctype html>
   </div>
 
   <!-- Framework chrome — DO NOT EDIT below this line. -->
-  <nav class="deck-counter" role="navigation" aria-label="Deck navigation">
-    <button type="button" id="deck-prev" aria-label="Previous slide">‹</button>
+  <nav class="deck-counter" role="navigation" aria-label="슬라이드 탐색">
+    <button type="button" id="deck-prev" aria-label="이전 슬라이드">‹</button>
     <span class="deck-count"><span id="deck-cur">01</span> <span class="total">/ <span id="deck-total">01</span></span></span>
-    <button type="button" id="deck-next" aria-label="Next slide">›</button>
+    <button type="button" id="deck-next" aria-label="다음 슬라이드">›</button>
   </nav>
-  <div class="deck-hint">← / → · space</div>
+  <div class="deck-hint">← / → · 스페이스</div>
 
   <script>
     (function () {
